@@ -1,101 +1,107 @@
-html {
-    scroll-behavior: smooth;
-}
 /* ==========================================================================
    01. DESIGN TOKENS & SYSTEM VARIABLE THEMING
    ========================================================================== */
 :root {
     /* Color Palette Roles (Material Design 3 Concept) */
-    --primary: #a03f28;
-    --primary-container: #c0573e;
-    --on-primary: #ffffff;
-    --secondary: #8b5006;
-    --secondary-container: #feb063;
-    --on-secondary-container: #764200;
-    --tertiary: #605d5b;
-    --background: #fff8f6;
-    --surface: #fff8f6;
-    --surface-variant: #fddbd0;
-    --surface-container-lowest: #ffffff;
-    --surface-container-low: #fff1ec;
-    --surface-container: #ffe9e2;
-    --surface-container-high: #ffe2d8;
+    --primary:                   #a03f28;
+    --primary-container:         #c0573e;
+    --on-primary:                #ffffff;
+    --secondary:                 #8b5006;
+    --secondary-container:       #feb063;
+    --on-secondary-container:    #764200;
+    --tertiary:                  #605d5b;
+    --background:                #fff8f6;
+    --surface:                   #fff8f6;
+    --surface-variant:           #fddbd0;
+    --surface-container-lowest:  #ffffff;
+    --surface-container-low:     #fff1ec;
+    --surface-container:         #ffe9e2;
+    --surface-container-high:    #ffe2d8;
     --surface-container-highest: #fddbd0;
-    --on-surface: #291710;
-    --on-surface-variant: #56423d;
-    --outline: #8a726c;
-    --outline-variant: #ddc0ba;
-    
-    /* Typography Typography Stack */
+    --on-surface:                #291710;
+    --on-surface-variant:        #56423d;
+    --outline:                   #8a726c;
+    --outline-variant:           #ddc0ba;
+ 
+    /* Typography Stack */
     --font-display: 'Libre Caslon Text', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-    
-    /* Layout Tokens Grid System */
-    --unit: 8px;
-    --container-max: 1200px;
-    --gutter: 24px;
-    --margin-desktop: 40px;
-    --margin-mobile: 16px;
-    --radius-lg: 0.5rem;
-    --radius-xl: 0.75rem;
+    --font-body:    'Plus Jakarta Sans', sans-serif;
+ 
+    /* Layout Tokens */
+    --unit:             8px;
+    --container-max:    1200px;
+    --gutter:           24px;
+    --margin-desktop:   40px;
+    --margin-mobile:    16px;
+    --radius-lg:        0.5rem;
+    --radius-xl:        0.75rem;
 }
-
+ 
+ 
 /* ==========================================================================
    02. BASE CORE GLOBAL STYLES (Resets)
    ========================================================================== */
-* {
+ 
+/* FIX: Duplikat deklarasi html { scroll-behavior: smooth } dihapus.
+   Sebelumnya muncul di baris pertama file DAN di dalam seksi ini. */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
+ 
 html {
     scroll-behavior: smooth;
 }
-
+ 
 body {
     background-color: var(--background);
     color: var(--on-surface);
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 24px;
-    padding-top: 80px; /* Offset space allocation for fixed navbar height */
+    padding-top: 80px; /* Offset untuk tinggi fixed navbar */
 }
-
-h1, h2, h3, .brand-logo {
+ 
+h1,
+h2,
+h3,
+.brand-logo {
     font-family: var(--font-display);
 }
-
+ 
 a {
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease;
 }
-
+ 
 button {
     cursor: pointer;
     border: none;
     background: none;
     font-family: inherit;
 }
-
+ 
 ul {
     list-style: none;
 }
-
-/* Global Content Layout Grid Boundary Wrapper */
+ 
 .container {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 var(--margin-mobile);
 }
-
+ 
 @media (min-width: 768px) {
     .container {
         padding: 0 var(--margin-desktop);
     }
 }
-
+ 
+ 
 /* ==========================================================================
    03. CORE SYSTEM UTILITIES & GLOBAL BUTTONS
    ========================================================================== */
@@ -110,12 +116,18 @@ ul {
     text-align: center;
     padding: 20px;
 }
-
+ 
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     vertical-align: middle;
 }
-
+ 
+/* FIX: Ditambahkan — class ini digunakan di HTML pada section Signature Senja
+   (<section class="container section-padding">) namun belum didefinisikan di CSS. */
+.section-padding {
+    padding: 96px 0;
+}
+ 
 .btn-primary {
     background-color: var(--primary);
     color: var(--on-primary);
@@ -127,14 +139,21 @@ ul {
     box-shadow: 0 4px 12px rgba(160, 63, 40, 0.2);
     display: inline-block;
 }
-
+ 
 .btn-primary:hover {
     background-color: var(--primary-container);
     transform: scale(1.02);
 }
-
+ 
+/* FIX: Ditambahkan — modifier untuk tombol hero CTA.
+   Sebelumnya diset via inline style="padding: 16px 32px;" yang sudah dihapus dari HTML. */
+.btn-hero {
+    padding: 16px 32px;
+}
+ 
+ 
 /* ==========================================================================
-   04. NAVIGATION COMPONENT (Header Site Context)
+   04. NAVIGATION COMPONENT
    ========================================================================== */
 nav {
     position: fixed;
@@ -143,101 +162,104 @@ nav {
     height: 80px;
     background: rgba(255, 248, 246, 0.9);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+    /* FIX: Sebelumnya rgba(255, 0, 0, 0.2) — warna merah debugging yang lolos ke production.
+       Diganti dengan token warna yang benar dari design system. */
+    border-bottom: 1px solid var(--outline-variant);
     z-index: 100;
     display: flex;
     align-items: center;
 }
-
+ 
 .nav-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
-
+ 
 .nav-links {
     display: none;
     gap: var(--gutter);
 }
-
+ 
 .nav-links a {
     font-family: var(--font-display);
     font-size: 20px;
     font-weight: 500;
     color: var(--on-surface-variant);
-    position: relative; 
+    position: relative;
     text-decoration: none;
     padding-bottom: 4px;
-    transition: color 0.3s ease; /* Hapus transisi font-weight agar pergantian bold tidak patah/laggy */
+    transition: color 0.3s ease;
 }
-
-/* Garis bawah default: Tersembunyi */
+ 
 .nav-links a::after {
     content: '';
     position: absolute;
     width: 100%;
-    transform: scaleX(0); 
+    transform: scaleX(0);
     height: 2px;
     bottom: 0;
     left: 0;
     background-color: var(--primary);
-    transform-origin: bottom center; 
-    transition: transform 0.3s ease-out; 
+    transform-origin: bottom center;
+    transition: transform 0.3s ease-out;
 }
-
-/* Efek Hover */
+ 
 .nav-links a:hover {
-    color: var(--primary); 
+    color: var(--primary);
 }
-
+ 
 .nav-links a:hover::after {
-    transform: scaleX(1); 
+    transform: scaleX(1);
 }
-
-/* ==========================================
-   KONDISI SELEKSI UTAMA (ACTIVE MENU BOLD)
-   ========================================== */
+ 
 .nav-links a.active {
     color: var(--primary) !important;
-    font-weight: 700 !important; /* Mengunci teks agar tetap Bold Tebal */
+    font-weight: 700 !important;
 }
-
-/* Memaksa garis bawah menu aktif tetap memanjang tanpa harus di-hover */
+ 
 .nav-links a.active::after {
     transform: scaleX(1) !important;
 }
-
+ 
 .nav-actions {
     display: none;
     gap: 16px;
 }
-
+ 
 .brand-logo {
     font-size: 32px;
     font-weight: 700;
     color: var(--primary);
 }
-
+ 
 .mobile-menu-btn {
     display: block;
     color: var(--on-surface);
 }
-
+ 
+/* FIX: Duplikat blok @media navbar identik dihapus.
+   Sebelumnya blok ini muncul dua kali berturut-turut. */
 @media (min-width: 768px) {
-    .nav-links { display: flex; }
-    .nav-actions { display: flex; }
-    .mobile-menu-btn { display: none; }
-    .brand-logo { font-size: 40px; }
+    .nav-links {
+        display: flex;
+    }
+ 
+    .nav-actions {
+        display: flex;
+    }
+ 
+    .mobile-menu-btn {
+        display: none;
+    }
+ 
+    .brand-logo {
+        font-size: 40px;
+    }
 }
-
-@media (min-width: 768px) {
-    .nav-links { display: flex; }
-    .nav-actions { display: flex; }
-    .mobile-menu-btn { display: none; }
-    .brand-logo { font-size: 40px; }
-}
-
+ 
+ 
 /* ==========================================================================
    05. HERO HEADER COMPONENT
    ========================================================================== */
@@ -250,48 +272,52 @@ nav {
     overflow: hidden;
     text-align: center;
 }
-
+ 
 .hero-bg {
     position: absolute;
     inset: 0;
     z-index: -1;
 }
-
+ 
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, var(--surface), rgba(255, 248, 246, 0.8), transparent);
 }
-
+ 
 .hero-content {
     max-width: 768px;
     padding: 0 var(--margin-mobile);
     z-index: 1;
 }
-
+ 
 h1 {
     font-size: 36px;
     line-height: 44px;
     margin-bottom: 24px;
     font-weight: 700;
 }
-
+ 
 h1 .italic {
     font-style: italic;
     color: var(--primary);
 }
-
+ 
 .hero-p {
     font-size: 18px;
     line-height: 28px;
     color: var(--on-surface-variant);
     margin-bottom: 40px;
 }
-
+ 
 @media (min-width: 768px) {
-    h1 { font-size: 48px; line-height: 56px; }
+    h1 {
+        font-size: 48px;
+        line-height: 56px;
+    }
 }
-
+ 
+ 
 /* ==========================================================================
    06. FEATURED / SIGNATURE COLLECTION SECTION
    ========================================================================== */
@@ -299,33 +325,31 @@ h1 .italic {
     text-align: center;
     margin-bottom: 64px;
 }
-
+ 
 .section-header h2 {
     font-size: 32px;
     color: var(--primary);
     margin-bottom: 16px;
 }
-
+ 
 .section-header p {
     color: var(--on-surface-variant);
     max-width: 500px;
     margin: 0 auto;
 }
-
-/* Grid layout definition for composite signature products */
+ 
 .featured-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--gutter);
 }
-
+ 
 @media (min-width: 768px) {
     .featured-grid {
         grid-template-columns: repeat(12, 1fr);
     }
 }
-
-/* Base Flexible Object Cards */
+ 
 .card {
     background: var(--surface-container-lowest);
     border-radius: var(--radius-xl);
@@ -335,75 +359,94 @@ h1 .italic {
     display: flex;
     flex-direction: column;
 }
-
+ 
 .card-large {
     grid-column: span 7;
     height: 500px;
 }
-
-.card-large .card-img { height: 66%; }
-
+ 
+.card-large .card-img {
+    height: 66%;
+}
+ 
 .card-small-col {
     grid-column: span 5;
     display: flex;
     flex-direction: column;
     gap: var(--gutter);
 }
-
+ 
 .card-small {
     flex: 1;
     flex-direction: row;
 }
-
-.card-small .card-img { width: 40%; }
-.card-small .card-body { width: 60%; }
-
+ 
+.card-small .card-img {
+    width: 40%;
+}
+ 
+.card-small .card-body {
+    width: 60%;
+}
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.card-small .card-title {
+    font-size: 20px;
+}
+ 
+.card-small .card-desc {
+    margin-bottom: 12px;
+}
+ 
+.card-small .card-price {
+    font-size: 16px;
+}
+ 
 .card-img {
     overflow: hidden;
     position: relative;
 }
-
+ 
 .card-body {
     padding: 24px;
     position: relative;
 }
-
+ 
 .card-large .card-body {
     margin-top: -24px;
     background: var(--surface-container-lowest);
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
-
+ 
 .card-title-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 8px;
 }
-
+ 
 .card-title {
     font-size: 24px;
     font-weight: 600;
 }
-
+ 
 .card-price {
     color: var(--secondary);
     font-weight: 500;
     font-size: 18px;
 }
-
+ 
 .card-desc {
     font-size: 14px;
     color: var(--on-surface-variant);
 }
-
-/* Metadata Chips/Tags */
+ 
 .tags {
     display: flex;
     gap: 8px;
     margin-top: 16px;
 }
-
+ 
 .tag {
     font-size: 12px;
     padding: 4px 12px;
@@ -411,53 +454,65 @@ h1 .italic {
     border-radius: 9999px;
     font-weight: 600;
 }
-
+ 
+ 
 /* ==========================================================================
-   07. STORY & STEPS BEEN TO CUP
+   07. STORY (ABOUT) & FROM BEAN TO CUP STEPS
    ========================================================================== */
-#story {
+ 
+/* FIX: Selector #story tidak ada di HTML — hanya #about yang digunakan.
+   Padding 96px dan background dipindahkan ke dalam #about.
+   Sebelumnya ada dua rule terpisah: #story { padding; background } dan
+   #about { scroll-margin-top } — keduanya digabung di sini. */
+#about {
     padding: 96px 0;
     background: var(--surface-container-low);
+    scroll-margin-top: 100px;
 }
-
-#about {
-    scroll-margin-top: 100px; 
-}
-
+ 
 .story-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 65px;
     align-items: center;
 }
-
+ 
 @media (min-width: 768px) {
-    .story-grid { grid-template-columns: 1fr 1fr; }
-    .story-text { order: 2; }
-    .story-img-container { order: 1; }
+    .story-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+ 
+    .story-text {
+        order: 2;
+    }
+ 
+    .story-img-container {
+        order: 1;
+    }
 }
-
+ 
 .story-img-container {
     position: relative;
 }
-
+ 
+/* FIX: position: relative dideklarasikan dua kali dalam satu ruleset.
+   Salah satu dihapus. */
 .story-img {
     overflow: hidden;
-    position: relative;
     aspect-ratio: 4/5;
     border-radius: var(--radius-xl);
     box-shadow: 0 8px 32px rgba(41, 23, 16, 0.1);
-    z-index: 1;
     position: relative;
+    z-index: 1;
 }
-
-.story-img img{
+ 
+.story-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
-
+ 
 .overline {
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -467,31 +522,38 @@ h1 .italic {
     display: block;
     margin-bottom: 16px;
 }
-
+ 
 .story-title {
     font-size: 36px;
     line-height: 1.1;
     color: var(--primary);
     margin-bottom: 20px;
 }
-
+ 
 @media (min-width: 768px) {
-    .story-title { font-size: 48px; }
+    .story-title {
+        font-size: 48px;
+    }
 }
-
+ 
 .story-p {
     font-size: 18px;
     line-height: 1.6;
     color: var(--on-surface-variant);
     margin-bottom: 24px;
 }
-
-/* Team Section Styles */
+ 
 .team-section {
     margin-top: 96px;
     text-align: center;
 }
-
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.team-section-title {
+    font-size: 32px;
+    margin-bottom: 48px;
+}
+ 
 .team-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -500,35 +562,51 @@ h1 .italic {
     margin: 0 auto;
     padding: 0 16px;
 }
-
+ 
 @media (min-width: 768px) {
-    .team-grid { grid-template-columns: repeat(5, 1fr); }
+    .team-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }
-
+ 
 .team-card {
     padding: 24px;
     background: var(--surface-container-lowest);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(221, 192, 186, 0.3);
 }
-
+ 
 .team-card h4 {
     color: var(--primary);
     font-size: 18px;
     margin-bottom: 4px;
 }
-
+ 
 .team-card span {
     font-size: 14px;
     color: var(--secondary);
     font-weight: 600;
 }
-
+ 
+ 
 /* ==========================================================================
-   08. EXPLORER MENU CATALOG COMPONENT
+   08. MENU CATALOG COMPONENT
    ========================================================================== */
-#menu { padding: 96px 0; }
-
+#menu {
+    padding: 96px 0;
+}
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.menu-header {
+    margin-bottom: 64px;
+}
+ 
+.menu-header p {
+    color: var(--on-surface-variant);
+    max-width: 600px;
+    margin-bottom: 10px;
+}
+ 
 .menu-filter {
     display: flex;
     overflow-x: auto;
@@ -536,9 +614,11 @@ h1 .italic {
     margin-top: -38px;
     padding-bottom: 38px;
 }
-
-.menu-filter::-webkit-scrollbar { display: none; }
-
+ 
+.menu-filter::-webkit-scrollbar {
+    display: none;
+}
+ 
 .filter-btn {
     padding: 12px 24px;
     border-radius: 9999px;
@@ -547,36 +627,41 @@ h1 .italic {
     font-size: 14px;
     white-space: nowrap;
 }
-
+ 
 .filter-btn.active {
     background: var(--primary);
     color: var(--on-primary);
 }
-
+ 
 .menu-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 64px 24px;
 }
-
+ 
 @media (min-width: 768px) {
-    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
-
+ 
 @media (min-width: 1024px) {
-    .menu-grid { grid-template-columns: repeat(4, 1fr); }
+    .menu-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
-
-.menu-item { 
-    text-align: center; 
-    cursor: pointer; 
+ 
+.menu-item {
+    text-align: center;
+    cursor: pointer;
     transition: opacity 0.4s ease, transform 0.4s ease;
     opacity: 1;
 }
-
+ 
+/* FIX: position: relative dideklarasikan dua kali dalam satu ruleset.
+   Salah satu dihapus. */
 .menu-item-img {
     overflow: hidden;
-    position: relative;
     aspect-ratio: 4/5;
     border-radius: 20px;
     margin-bottom: 24px;
@@ -584,26 +669,39 @@ h1 .italic {
     box-shadow: 0 4px 12px rgba(41, 23, 16, 0.05);
     border: 1px solid rgba(221, 192, 186, 0.3);
 }
-
+ 
 .menu-item-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
-
-.menu-item h3 { font-size: 24px; margin-bottom: 8px; }
-.menu-item p { color: var(--on-surface-variant); margin-bottom: 16px; }
-.menu-item .price { color: var(--primary); font-size: 18px; font-weight: 500; }
-
+ 
+.menu-item h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+ 
+.menu-item p {
+    color: var(--on-surface-variant);
+    margin-bottom: 16px;
+}
+ 
+.menu-item .price {
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 500;
+}
+ 
+ 
 /* ==========================================================================
-   09. STORE LOCATOR COFFE SOP
+   09. STORE LOCATOR
    ========================================================================== */
 #store {
     padding: 96px 0;
     background: var(--surface-container-low);
 }
-
+ 
 .store-container {
     display: flex;
     flex-direction: column;
@@ -613,32 +711,43 @@ h1 .italic {
     border: 1px solid rgba(221, 192, 186, 0.3);
     height: 600px;
 }
-
+ 
 @media (min-width: 1024px) {
-    .store-container { flex-direction: row; }
+    .store-container {
+        flex-direction: row;
+    }
 }
-
+ 
 .store-list {
     width: 100%;
     display: flex;
     flex-direction: column;
     border-right: 1px solid rgba(221, 192, 186, 0.3);
 }
-
-@media (min-width: 1024px) { .store-list { width: 33.33%; } }
-
+ 
+@media (min-width: 1024px) {
+    .store-list {
+        width: 33.33%;
+    }
+}
+ 
 .store-list-header {
     padding: 24px;
     background: var(--surface-container-low);
     border-bottom: 1px solid rgba(221, 192, 186, 0.3);
 }
-
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.store-list-header p {
+    font-size: 14px;
+}
+ 
 .store-items {
     overflow-y: auto;
     flex: 1;
     padding: 16px;
 }
-
+ 
 .store-item {
     padding: 20px;
     border-radius: var(--radius-lg);
@@ -646,28 +755,53 @@ h1 .italic {
     border: 1px solid transparent;
     cursor: pointer;
 }
-
+ 
 .store-item.active {
     background: var(--surface-container-high);
     border-color: rgba(221, 192, 186, 0.5);
 }
-
-.store-item h3 { font-size: 20px; margin-bottom: 8px; }
-.store-item p { font-size: 14px; color: var(--on-surface-variant); display: flex; align-items: start; gap: 8px; }
-
+ 
+.store-item h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+ 
+.store-item p {
+    font-size: 14px;
+    color: var(--on-surface-variant);
+    display: flex;
+    align-items: start;
+    gap: 8px;
+}
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.store-item-time {
+    font-size: 12px;
+    margin-top: 12px;
+    display: block;
+}
+ 
 .map-view {
     width: 100%;
     height: 300px;
     position: relative;
 }
-
-@media (min-width: 1024px) { .map-view { width: 66.66%; height: 100%; } }
-
+ 
+@media (min-width: 1024px) {
+    .map-view {
+        width: 66.66%;
+        height: 100%;
+    }
+}
+ 
+ 
 /* ==========================================================================
-   10. BOOKING RESERVATION SYSTEM INTERACTION
+   10. BOOKING RESERVATION SYSTEM
    ========================================================================== */
-#reservasi { padding: 96px 0; }
-
+#reservasi {
+    padding: 96px 0;
+}
+ 
 .res-container {
     background: rgba(192, 87, 62, 0.1);
     border-radius: 2rem;
@@ -677,18 +811,48 @@ h1 .italic {
     flex-direction: column;
     gap: 48px;
 }
-
+ 
 @media (min-width: 768px) {
-    .res-container { padding: 64px; flex-direction: row; }
+    .res-container {
+        padding: 64px;
+        flex-direction: row;
+    }
 }
-
-.res-form-side { flex: 1; }
-.res-info-side { width: 100%; }
-@media (min-width: 768px) { .res-info-side { width: 33.33%; } }
-
-/* Form Control Architecture */
-.form-group { margin-bottom: 16px; }
-.form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+ 
+.res-form-side {
+    flex: 1;
+}
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.res-form-side h2 {
+    font-size: 40px;
+}
+ 
+.res-form-side > p {
+    margin-bottom: 32px;
+    color: var(--on-surface-variant);
+}
+ 
+.res-info-side {
+    width: 100%;
+}
+ 
+@media (min-width: 768px) {
+    .res-info-side {
+        width: 33.33%;
+    }
+}
+ 
+.form-group {
+    margin-bottom: 16px;
+}
+ 
+.form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+ 
 .form-control {
     width: 100%;
     padding: 12px 16px;
@@ -697,15 +861,30 @@ h1 .italic {
     background: var(--surface-container-lowest);
     font-family: inherit;
 }
-
-/* Info Right Panel Component */
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.btn-submit-full {
+    width: 100%;
+    padding: 16px;
+    cursor: pointer;
+}
+ 
 .info-card {
     background: var(--surface-container-lowest);
     padding: 32px;
     border-radius: var(--radius-xl);
     border: 1px solid rgba(221, 192, 186, 0.3);
 }
-
+ 
+/* FIX: Ditambahkan .info-card-title sebagai selector eksplisit yang sesuai
+   dengan class yang digunakan di HTML (<h3 class="info-card-title">).
+   Selector .info-card h3 tetap dipertahankan sebagai fallback. */
+.info-card h3,
+.info-card-title {
+    color: var(--primary);
+    margin-bottom: 24px;
+}
+ 
 .info-row {
     display: flex;
     justify-content: space-between;
@@ -714,7 +893,32 @@ h1 .italic {
     margin-bottom: 16px;
     font-size: 14px;
 }
-
+ 
+/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.info-row span:last-child {
+    font-weight: 600;
+}
+ 
+.info-contact-box {
+    margin-top: 32px;
+    padding: 16px;
+    background: var(--surface-container-low);
+    border-radius: 8px;
+}
+ 
+.info-contact-label {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 4px;
+}
+ 
+.info-contact-number {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 18px;
+}
+ 
+ 
 /* ==========================================================================
    11. FOOTER SYSTEM WIDE AREA
    ========================================================================== */
@@ -723,65 +927,64 @@ footer {
     padding: 64px 0;
     border-top: 1px solid rgba(221, 192, 186, 0.3);
 }
-
+ 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Default mobile tumpuk 1 kolom */
+    grid-template-columns: 1fr;
     gap: 48px;
     padding-bottom: 40px;
 }
-
-/* Responsif untuk layar desktop (Tablet ke atas) */
+ 
 @media (min-width: 768px) {
-    .footer-grid { 
-        /* Mengubah struktur dari 4 kolom menjadi 3 kolom proporsional (2fr 1fr 1fr) */
-        grid-template-columns: 2fr 1fr 1fr; 
+    .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
     }
 }
-
-.footer-logo { 
-    font-size: 24px; 
-    color: var(--primary); 
-    margin-bottom: 16px; 
-    font-weight: 700; 
+ 
+/* FIX: Ditambahkan font-family agar konsisten dengan .brand-logo di navbar. */
+.footer-logo {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
 }
-
-.footer-p { 
-    font-size: 14px; 
-    color: var(--on-surface-variant); 
+ 
+.footer-p {
+    font-size: 14px;
+    color: var(--on-surface-variant);
     line-height: 1.6;
-    margin-bottom: 20px; 
-    max-width: 360px; /* Menjaga kalimat agar tidak terlalu melar ke kanan */
+    margin-bottom: 20px;
+    max-width: 360px;
 }
-
-.footer-heading { 
-    color: var(--primary); 
-    font-weight: 600; 
-    margin-bottom: 20px; 
-    font-size: 16px; 
+ 
+.footer-heading {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 16px;
 }
-
+ 
 .footer-links {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
-.footer-links li { 
-    margin-bottom: 12px; 
+ 
+.footer-links li {
+    margin-bottom: 12px;
 }
-
-.footer-links a { 
-    font-size: 14px; 
-    text-decoration: none; /* Dibuat tanpa underline biar lebih bersih dan modern */
-    color: var(--on-surface-variant); 
+ 
+.footer-links a {
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--on-surface-variant);
 }
-
+ 
 .footer-links a:hover {
-    color: var(--primary); /* Efek feedback interaktif saat link di-hover */
+    color: var(--primary);
 }
-
-/* Info List khusus Jam Operasional di Kolom 3 */
+ 
 .footer-info-list {
     list-style: none;
     padding: 0;
@@ -790,19 +993,18 @@ footer {
     font-size: 14px;
     line-height: 1.8;
 }
-
+ 
 .footer-info-list li span {
     font-size: 12px;
     opacity: 0.8;
 }
-
-/* Pembungkus area kontak WA Admin */
+ 
 .footer-contact-area {
     border-top: 1px dashed rgba(0, 0, 0, 0.1);
     padding-top: 16px;
     margin-top: 24px;
 }
-
+ 
 .footer-contact-link {
     text-decoration: none;
     display: flex;
@@ -813,89 +1015,74 @@ footer {
     font-size: 16px;
     transition: transform 0.3s ease;
 }
-
+ 
 .footer-contact-link:hover {
-    transform: translateY(-2px); /* Efek pop-up tipis saat nomor WA disorot */
+    transform: translateY(-2px);
 }
-
-/* Area Hak Cipta di paling bawah */
+ 
 .copyright {
-    margin-top: 0;
     padding-top: 24px;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     font-size: 14px;
     color: var(--on-surface-variant);
     text-align: center;
 }
-
-
+ 
+ 
 /* ==========================================================================
    12. SCROLL REVEAL UTILITY ANIMATION SYSTEM
    ========================================================================== */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
                 transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform, opacity;
 }
-
-/* Kelas yang dipicu oleh JavaScript ketika elemen masuk ke area pandang */
+ 
 .scroll-reveal.reveal-active {
     opacity: 1;
     transform: translateY(0);
 }
-
-/* Staggered Delay opsional untuk elemen tim/grid agar muncul bergantian */
+ 
+/* Staggered delay untuk animasi masuk kartu tim yang bergantian */
 .team-grid .team-card:nth-child(1) { transition-delay: 0.1s; }
 .team-grid .team-card:nth-child(2) { transition-delay: 0.2s; }
 .team-grid .team-card:nth-child(3) { transition-delay: 0.3s; }
 .team-grid .team-card:nth-child(4) { transition-delay: 0.4s; }
 .team-grid .team-card:nth-child(5) { transition-delay: 0.5s; }
-
-/* Efek transisi halus untuk pergeseran parallax background */
+ 
 #hero .hero-bg img {
     transition: transform 0.1s linear;
 }
-
-
+ 
+ 
 /* ==========================================================================
-   13. HERO ENTRANCE ANIMATION SYSTEM (Bagian Awal)
+   13. HERO ENTRANCE ANIMATION SYSTEM
    ========================================================================== */
-
-/* State awal background dan overlay (tersembunyi) */
-.hero-bg, .hero-overlay {
+ 
+/* State awal background dan overlay (tersembunyi, dipicu oleh JS) */
+.hero-bg,
+.hero-overlay {
     opacity: 0;
     transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
-/* State awal untuk konten teks di dalam Hero */
+ 
+/* State awal untuk elemen teks di dalam Hero */
 .hero-reveal-item {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1),
                 transform 1s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform, opacity;
 }
-
-/* Ketika class pemicu aktif dari JS */
+ 
 .hero-reveal-item.hero-revealed {
     opacity: 1;
     transform: translateY(0);
 }
-
-/* Efek jeda berurutan (Staggered Delay) */
-/* Judul h1 muncul duluan */
-.hero-content h1.hero-revealed {
-    transition-delay: 0.3s;
-}
-
-/* Paragraf deskripsi muncul kedua */
-.hero-content .hero-p.hero-revealed {
-    transition-delay: 0.5s;
-}
-
-/* Tombol "Lihat Menu Kami" muncul paling akhir */
-.hero-content .btn-primary.hero-revealed {
-    transition-delay: 0.7s;
-}
+ 
+/* Staggered delay untuk animasi masuk konten hero */
+.hero-content h1.hero-revealed        { transition-delay: 0.3s; }
+.hero-content .hero-p.hero-revealed   { transition-delay: 0.5s; }
+.hero-content .btn-primary.hero-revealed { transition-delay: 0.7s; }

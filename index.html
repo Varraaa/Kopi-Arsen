@@ -4,19 +4,29 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Arsen Coffee - Arah Senja. Kopi berkualitas tinggi dengan suasana hangat yang menenangkan di Bandung." />
+    <meta name="theme-color" content="#1a1a1a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Arsen - Arah Senja Coffee" />
+    <meta property="og:description" content="Nikmati setiap tegukan di Arah Senja. Kopi berkualitas dengan suasana hangat, sebuah momen jeda di tengah hiruk-pikuk kota." />
+    <meta property="og:image" content="Image/heroBG.webp" />
     <title>Arsen - Arah Senja Coffee</title>
-    <!-- FONTS GOOGLE -->
+
+    <!-- FAVICON -->
+    <link rel="icon" href="Image/favicon.ico" />
+    <link rel="preload" as="image" href="Image/heroBG.webp" />
+
+    <!-- Goggle Fonts Preconnect dan Stylesheet -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2 family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2 family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+
     <!-- LINK CSS -->
-    <link rel="stylesheet" href="Style/Style.css">
-        <!-- LINK JS -->
+    <link rel="stylesheet" href="Style/Style.css" />
+
+    <!-- LINK JS -->
     <script src="JavaScript/Script.js" defer></script>
     <script src="JavaScript/Menu.js" defer></script>
     <script src="JavaScript/Reservasi.js" defer></script>
@@ -24,10 +34,11 @@
 </head>
 
 <body>
+    
     <!-- NAVBAR -->
     <nav>
         <div class="container nav-content">
-            <a class="brand-logo" href="#">Arsen</a>
+            <a class="brand-logo" href="/">Arsen</a>
             <div class="nav-links">
                 <a href="#hero" class="active">Home</a>
                 <a href="#about">About Us</a>
@@ -37,50 +48,59 @@
             <div class="nav-actions">
                 <a class="btn-primary" href="#reservasi">Reservasi</a>
             </div>
-            <button class="mobile-menu-btn">
+            <button class="mobile-menu-btn" aria-label="Buka menu navigasi">
                 <span class="material-symbols-outlined" style="font-size: 32px;">menu</span>
             </button>
         </div>
     </nav>
     <!-- NAVBAR END -->
 
+    
     <!-- BAGIAN UTAMA -->
     <main>
+
         <!-- HERO -->
         <section id="hero">
             <div class="hero-bg image-placeholder">
-                <img src="Image/heroBG.webp" alt="Hero Background"
-                    style="width: 105%; height: 150%; object-fit: cover;">
+                <img
+                    src="Image/heroBG.webp"
+                    alt="Suasana kafe Arsen Coffee - Arah Senja"
+                    style="width: 105%; height: 150%; object-fit: cover;"
+                />
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>Nikmati Setiap Tegukan di <span class="italic">Arah Senja.</span></h1>
-                <p class="hero-p">Kopi berkualitas tinggi dengan suasana hangat yang menenangkan. Sebuah momen jeda di
-                    tengah hiruk-pikuk kota.</p>
-                <a class="btn-primary" href="#menu" style="padding: 16px 32px;">Lihat Menu Kami</a>
+                <p class="hero-p">Kopi berkualitas tinggi dengan suasana hangat yang menenangkan. Sebuah momen jeda di tengah hiruk-pikuk kota.</p>
+                <a class="btn-primary btn-hero" href="#menu">Lihat Menu Kami</a>
             </div>
         </section>
+        <!-- HERO END -->
 
-        <section class="container" style="padding: 96px 0;">
+        <!-- SIGNATURE SENJA -->
+        <section class="container section-padding">
             <div class="section-header">
                 <h2>Signature Senja</h2>
                 <p>Kurasi minuman terbaik kami, diracik dengan perlahan untuk menemani momen sore Anda.</p>
             </div>
+
             <div class="featured-grid">
 
                 <div class="card card-large">
                     <div class="card-img">
-                        <img src="Image/gula aren landscape.webp" alt="Senja Gula Aren"
-                            style="width: 100%; height: 100%; object-fit: cover;">
-
+                        <img
+                            src="Image/gula aren landscape.webp"
+                            alt="Senja Gula Aren - minuman signature Arsen Coffee"
+                            loading="lazy"
+                            style="width: 100%; height: 100%; object-fit: cover;"
+                        />
                     </div>
                     <div class="card-body">
                         <div class="card-title-row">
                             <h3 class="card-title">Senja Gula Aren</h3>
                             <span class="card-price">Rp 35.000</span>
                         </div>
-                        <p class="card-desc">Espresso blend house khas Arsen dengan susu creamy dan legitnya gula aren
-                            asli yang perlahan meleleh.</p>
+                        <p class="card-desc">Espresso blend house khas Arsen dengan susu creamy dan legitnya gula aren asli yang perlahan meleleh.</p>
                         <div class="tags">
                             <span class="tag">Iced</span>
                             <span class="tag">Signature</span>
@@ -91,33 +111,40 @@
                 <div class="card-small-col">
                     <div class="card card-small">
                         <div class="card-img">
-                            <img src="Image/macchiato.webp" alt="Senja Macchiato"
-                                style="width: 100%; height: 100%; object-fit: cover;">
+                            <img
+                                src="Image/macchiato.webp"
+                                alt="Sunset Macchiato"
+                                loading="lazy"
+                                style="width: 100%; height: 100%; object-fit: cover;"
+                            />
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title" style="font-size: 20px;">Sunset Macchiato</h3>
-                            <p class="card-desc" style="margin-bottom: 12px;">Vanilla manis, susu hangat, dan espresso
-                                dengan sentuhan karamel.</p>
-                            <span class="card-price" style="font-size: 16px;">Rp 38.000</span>
+                            <h3 class="card-title">Sunset Macchiato</h3>
+                            <p class="card-desc">Vanilla manis, susu hangat, dan espresso dengan sentuhan karamel.</p>
+                            <span class="card-price">Rp 38.000</span>
                         </div>
                     </div>
+
                     <div class="card card-small">
                         <div class="card-img">
-                            <img src="Image/klepon latte.webp" alt="Klepon Latte"
-                                style="width: 100%; height: 100%; object-fit: cover;">
+                            <img
+                                src="Image/klepon latte.webp"
+                                alt="Klepon Latte"
+                                loading="lazy"
+                                style="width: 100%; height: 100%; object-fit: cover;"
+                            />
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title" style="font-size: 20px;">Klepon Latte</h3>
-                            <p class="card-desc" style="margin-bottom: 12px;">Rasa pandan, kelapa sangrai, dan sentuhan
-                                kopi pekat.</p>
-                            <span class="card-price" style="font-size: 16px;">Rp 40.000</span>
+                            <h3 class="card-title">Klepon Latte</h3>
+                            <p class="card-desc">Rasa pandan, kelapa sangrai, dan sentuhan kopi pekat.</p>
+                            <span class="card-price">Rp 40.000</span>
                         </div>
                     </div>
                 </div>
 
             </div>
         </section>
-        <!-- HERO END -->
+        <!-- SIGNATURE SENJA END -->
 
         <!-- ABOUT -->
         <section id="about">
@@ -125,23 +152,23 @@
                 <div class="story-grid">
                     <div class="story-img-container">
                         <div class="story-img">
-                            <img src="Image/place.webp" alt="Our Story Image">
+                            <img
+                                src="Image/place.webp"
+                                alt="Interior kafe Arsen Coffee"
+                                loading="lazy"
+                            />
                         </div>
                     </div>
                     <div class="story-text">
                         <span class="overline">Cerita Kami</span>
                         <h2 class="story-title">Sebuah Jeda di Balik Riuhnya Kota.</h2>
-                        <p class="story-p">Arsen lahir dari filosofi 'Arah Senja' — sebuah momen magis di mana hari
-                            melambat dan kenyamanan dimulai. Kami percaya bahwa secangkir kopi bukan sekadar rutinitas,
-                            melainkan ritual merayakan ketenangan.</p>
-                        <p class="story-p">Setiap biji kopi dipilih dengan seksama, diseduh perlahan di 'slow bar' kami
-                            untuk memastikan setiap tegukan memberikan kehangatan yang Anda butuhkan.</p>
+                        <p class="story-p">Arsen lahir dari filosofi 'Arah Senja' — sebuah momen magis di mana hari melambat dan kenyamanan dimulai. Kami percaya bahwa secangkir kopi bukan sekadar rutinitas, melainkan ritual merayakan ketenangan.</p>
+                        <p class="story-p">Setiap biji kopi dipilih dengan seksama, diseduh perlahan di 'slow bar' kami untuk memastikan setiap tegukan memberikan kehangatan yang Anda butuhkan.</p>
                     </div>
                 </div>
 
                 <div class="team-section">
-                    <h3 class="story-title" style="font-size: 32px; margin-bottom: 48px;">From Bean to Cup
-                    </h3>
+                    <h3 class="story-title team-section-title">From Bean to Cup</h3>
                     <div class="team-grid">
                         <div class="team-card">
                             <h4>Sourcing</h4>
@@ -163,7 +190,6 @@
                             <h4>Brewing</h4>
                             <span>Seduhan Sempurna</span>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -173,12 +199,9 @@
         <!-- MENU -->
         <section id="menu">
             <div class="container">
-                <div style="margin-bottom: 64px;">
+                <div class="menu-header">
                     <h2 class="story-title">Our Menu</h2>
-                    <p style="color: var(--on-surface-variant); max-width: 600px; margin-bottom: 10px;">
-                        Temukan pilihan hidangan buatan tangan kami, yang dirancang dengan ketepatan dan gairah untuk
-                        momen istirahat sempurna Anda.
-                    </p>
+                    <p>Temukan pilihan hidangan buatan tangan kami, yang dirancang dengan ketepatan dan gairah untuk momen istirahat sempurna Anda.</p>
                 </div>
 
                 <div class="menu-filter">
@@ -189,9 +212,10 @@
                 </div>
 
                 <div class="menu-grid">
+
                     <div class="menu-item" data-category="coffee">
                         <div class="menu-item-img">
-                            <img src="Image/gula aren latte.webp" alt="Signature Gula Aren">
+                            <img src="Image/gula aren latte.webp" alt="Signature Gula Aren" loading="lazy" />
                         </div>
                         <h3>Signature Gula Aren</h3>
                         <p>Double shot espresso berpadu dengan gurihnya susu alami.</p>
@@ -200,7 +224,7 @@
 
                     <div class="menu-item" data-category="coffee">
                         <div class="menu-item-img">
-                            <img src="Image/classic cappucino.webp" alt="Classic Cappuccino">
+                            <img src="Image/classic cappucino.webp" alt="Classic Cappuccino" loading="lazy" />
                         </div>
                         <h3>Classic Cappuccino</h3>
                         <p>Kombinasi espresso yang seimbang dengan susu hangat.</p>
@@ -209,7 +233,7 @@
 
                     <div class="menu-item" data-category="coffee">
                         <div class="menu-item-img">
-                            <img src="Image/klepon latte.webp" alt="Klepon Latte">
+                            <img src="Image/klepon latte.webp" alt="Klepon Latte" loading="lazy" />
                         </div>
                         <h3>Klepon Latte</h3>
                         <p>Minuman kopi dengan rasa klepon yang manis dan gurih.</p>
@@ -218,16 +242,16 @@
 
                     <div class="menu-item" data-category="coffee">
                         <div class="menu-item-img">
-                            <img src="Image/gula aren landscape.webp" alt="Senja Gula Aren">
+                            <img src="Image/gula aren landscape.webp" alt="Senja Gula Aren" loading="lazy" />
                         </div>
                         <h3>Senja Gula Aren</h3>
-                        <p>Espresso blend khas Arsen dengan susu creamy dan legitnya gula aren..</p>
+                        <p>Espresso blend khas Arsen dengan susu creamy dan legitnya gula aren.</p>
                         <span class="price">Rp 35.000</span>
                     </div>
 
                     <div class="menu-item" data-category="non-coffee">
                         <div class="menu-item-img">
-                            <img src="Image/matcha latte.webp" alt="Matcha Latte">
+                            <img src="Image/matcha latte.webp" alt="Matcha Latte" loading="lazy" />
                         </div>
                         <h3>Matcha Latte</h3>
                         <p>Minuman berbasis bubuk matcha hijau dengan susu creamy.</p>
@@ -236,7 +260,7 @@
 
                     <div class="menu-item" data-category="non-coffee">
                         <div class="menu-item-img">
-                            <img src="Image/lemon tea.webp" alt="Lemon Tea">
+                            <img src="Image/lemon tea.webp" alt="Lemon Tea" loading="lazy" />
                         </div>
                         <h3>Lemon Tea</h3>
                         <p>Minuman teh manis dengan rasa lemon yang segar.</p>
@@ -245,7 +269,7 @@
 
                     <div class="menu-item" data-category="side-dish">
                         <div class="menu-item-img">
-                            <img src="Image/churros.webp" alt="Churros">
+                            <img src="Image/churros.webp" alt="Churros" loading="lazy" />
                         </div>
                         <h3>Churros</h3>
                         <p>Donat goreng renyah yang disajikan dengan saus cokelat.</p>
@@ -254,12 +278,13 @@
 
                     <div class="menu-item" data-category="side-dish">
                         <div class="menu-item-img">
-                            <img src="Image/potato chips.webp" alt="Potato Chips">
+                            <img src="Image/potato chips.webp" alt="Potato Chips" loading="lazy" />
                         </div>
                         <h3>Potato Chips</h3>
-                        <p>Camilan renyah dengan rasa gurih dan rasa aentang asli.</p>
+                        <p>Camilan renyah dengan rasa gurih dan sentuhan asli.</p>
                         <span class="price">Rp 16.000</span>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -277,40 +302,61 @@
                     <div class="store-list">
                         <div class="store-list-header">
                             <h3 style="color: var(--primary);">Lokasi Outlet</h3>
-                            <p style="font-size: 14px;">2 outlet strategis di Bandung</p>
+                            <p class="store-list-header p">2 outlet strategis di Bandung</p>
                         </div>
                         <div class="store-items">
-                            <div class="store-item active"
-                                data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.876732631247!2d107.52306777507953!3d-7.02377279297793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ed3233872c83%3A0x7c82ef8130e20902!2sYans%20Food%20(%20Aneka%20Nasi%20dan%20Cemilan%20Frozen%20Food%20)!5e0!3m2!1sid!2sid!4v1779864152029!5m2!1sid!2sid">
+                            <div
+                                class="store-item active"
+                                data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.876732631247!2d107.52306777507953!3d-7.02377279297793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ed3233872c83%3A0x7c82ef8130e20902!2sYans%20Food%20(%20Aneka%20Nasi%20dan%20Cemilan%20Frozen%20Food%20)!5e0!3m2!1sid!2sid!4v1779864152029!5m2!1sid!2sid"
+                            >
                                 <h3>Arsen Dago</h3>
-                                <p><span class="material-symbols-outlined">location_on</span> Jl. Ir. H. Juanda No. 15,
-                                    Dago</p>
-                                <span style="font-size: 12px; margin-top: 12px; display: block;">07:00 - 22:00</span>
+                                <p>
+                                    <span class="material-symbols-outlined">location_on</span>
+                                    Jl. Ir. H. Juanda No. 15, Dago
+                                </p>
+                                <span class="store-item-time">07:00 - 22:00</span>
                             </div>
 
-                            <div class="store-item"
-                                data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.8572682238278!2d107.54303535929519!3d-7.026058291120293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68edc76611300b%3A0x3209179d92898707!2sKOPIMAGE!5e0!3m2!1sid!2sid!4v1779864369530!5m2!1sid!2sid">
+                            <div
+                                class="store-item"
+                                data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.8572682238278!2d107.54303535929519!3d-7.026058291120293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68edc76611300b%3A0x3209179d92898707!2sKOPIMAGE!5e0!3m2!1sid!2sid!4v1779864369530!5m2!1sid!2sid"
+                            >
                                 <h3>Arsen Buah Batu</h3>
-                                <p><span class="material-symbols-outlined">location_on</span> Jl. Buah Batu No. 62</p>
-                                <span style="font-size: 12px; margin-top: 12px; display: block;">08:00 - 23:00</span>
+                                <p>
+                                    <span class="material-symbols-outlined">location_on</span>
+                                    Jl. Buah Batu No. 62
+                                </p>
+                                <span class="store-item-time">08:00 - 23:00</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="map-view">
-                        <iframe id="map-frame"
+                        <!-- Peta 1: Arsen Dago (aktif secara default) -->
+                        <iframe
+                            id="map-frame"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.876732631247!2d107.52306777507953!3d-7.02377279297793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ed3233872c83%3A0x7c82ef8130e20902!2sYans%20Food%20(%20Aneka%20Nasi%20dan%20Cemilan%20Frozen%20Food%20)!5e0!3m2!1sid!2sid!4v1779864152029!5m2!1sid!2sid"
-                            width="100%" height="100%" style="border:0; display: block;" allowfullscreen=""
-                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                            width="100%"
+                            height="100%"
+                            style="border: 0; display: block;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Peta lokasi Arsen Dago"
+                        ></iframe>
 
-                        <iframe id="map-frame-2">
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.8572682238278!2d107.54303535929519!3d-7.026058291120293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68edc76611300b%3A0x3209179d92898707!2sKOPIMAGE!5e0!3m2!1sid!2sid!4v1779864369530!5m2!1sid!2sid">"
-                            width="100%" height="100%" style="border:0; display: block;" allowfullscreen=""
-                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                        <iframe
+                            id="map-frame-2"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.8572682238278!2d107.54303535929519!3d-7.026058291120293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68edc76611300b%3A0x3209179d92898707!2sKOPIMAGE!5e0!3m2!1sid!2sid!4v1779864369530!5m2!1sid!2sid"
+                            width="100%"
+                            height="100%"
+                            style="border: 0; display: none;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Peta lokasi Arsen Buah Batu"
+                        ></iframe>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -323,20 +369,30 @@
 
                     <div class="res-form-side">
                         <span class="overline">Reservasi Meja</span>
-                        <h2 class="story-title" style="font-size: 40px;">Pesan Mejamu Sekarang</h2>
-                        <p style="margin-bottom: 32px; color: var(--on-surface-variant);">
-                            Jangan sampai kehabisan tempat, amankan meja kamu sekarang!
-                        </p>
+                        <h2 class="story-title">Pesan Mejamu Sekarang</h2>
+                        <p>Jangan sampai kehabisan tempat, amankan meja kamu sekarang!</p>
 
-                        <form id="whatsapp-reservation-form">
+                        <form id="whatsapp-reservation-form" novalidate>
                             <div class="form-group">
-                                <input id="res-name" class="form-control" placeholder="Nama Lengkap" type="text"
-                                    required />
+                                <input
+                                    id="res-name"
+                                    class="form-control"
+                                    placeholder="Nama Lengkap"
+                                    type="text"
+                                    autocomplete="name"
+                                    required
+                                />
                             </div>
 
-                            <div class="form-group" style="margin-bottom: 16px;">
-                                <input id="res-phone" class="form-control"
-                                    placeholder="Nomor WhatsApp Anda (Contoh: 08123xxx)" type="tel" required />
+                            <div class="form-group">
+                                <input
+                                    id="res-phone"
+                                    class="form-control"
+                                    placeholder="Nomor WhatsApp Anda (Contoh: 08123xxx)"
+                                    type="tel"
+                                    autocomplete="tel"
+                                    required
+                                />
                             </div>
 
                             <div class="form-row">
@@ -345,8 +401,14 @@
                             </div>
 
                             <div class="form-row">
-                                <input id="res-guests" class="form-control" placeholder="Jumlah Tamu" type="number"
-                                    min="1" required />
+                                <input
+                                    id="res-guests"
+                                    class="form-control"
+                                    placeholder="Jumlah Tamu"
+                                    type="number"
+                                    min="1"
+                                    required
+                                />
                                 <select id="res-outlet" class="form-control" required>
                                     <option value="">Pilih Outlet</option>
                                     <option value="Arsen Dago">Arsen Dago</option>
@@ -354,8 +416,7 @@
                                 </select>
                             </div>
 
-                            <button class="btn-primary" style="width: 100%; padding: 16px; cursor: pointer;"
-                                type="submit">
+                            <button class="btn-primary btn-submit-full" type="submit">
                                 Konfirmasi Reservasi
                             </button>
                         </form>
@@ -363,25 +424,22 @@
 
                     <div class="res-info-side">
                         <div class="info-card">
-                            <h3 style="color: var(--primary); margin-bottom: 24px;">Info Penting</h3>
+                            <h3 class="info-card-title">Info Penting</h3>
                             <div class="info-row">
                                 <span>Min. Reservasi</span>
-                                <span style="font-weight: 600;">2 jam sebelumnya</span>
+                                <span>2 jam sebelumnya</span>
                             </div>
                             <div class="info-row">
                                 <span>Min. Order</span>
-                                <span style="font-weight: 600;">1 minuman/orang</span>
+                                <span>1 minuman/orang</span>
                             </div>
                             <div class="info-row">
                                 <span>Maks. Durasi</span>
-                                <span style="font-weight: 600;">3 jam/sesi</span>
+                                <span>3 jam/sesi</span>
                             </div>
-                            <div
-                                style="margin-top: 32px; padding: 16px; background: var(--surface-container-low); border-radius: 8px;">
-                                <span style="font-size: 12px; display: block; margin-bottom: 4px;">Kontak
-                                    WhatsApp</span>
-                                <span
-                                    style="font-weight: 700; color: var(--primary); font-size: 18px;">0812-9757-7567</span>
+                            <div class="info-contact-box">
+                                <span class="info-contact-label">Kontak WhatsApp</span>
+                                <span class="info-contact-number">0812-9757-7567</span>
                             </div>
                         </div>
                     </div>
@@ -390,6 +448,7 @@
             </div>
         </section>
         <!-- RESERVASI END -->
+
     </main>
     <!-- BAGIAN UTAMA END -->
 
@@ -401,22 +460,21 @@
                 <div>
                     <div class="footer-logo">Arsen</div>
                     <p class="footer-p">
-                        Arah Senja - The Direction of Sunset. Menyajikan kopi dengan kehangatan taktil dan ritme
-                        perlahan.
+                        Arah Senja - The Direction of Sunset. Menyajikan kopi dengan kehangatan taktil dan ritme perlahan.
                     </p>
-                    <div class="footer-links">
+                    <ul class="footer-links">
                         <li>
-                            <a href="https://instagram.com" target="_blank">
-                                <span class="material-symbols-outlined">Instagram</span> @arsen.coffee
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                                @arsen.coffee
                             </a>
                         </li>
-                    </div>
+                    </ul>
                 </div>
 
                 <div>
                     <h4 class="footer-heading">Navigasi</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#menu">Menu</a></li>
                         <li><a href="#store">Store Locator</a></li>
@@ -435,8 +493,8 @@
 
                     <div class="footer-contact-area">
                         <span class="footer-p">Hubungi Kami:</span>
-                        <a href="https://wa.me/6281297577567" target="_blank" class="footer-contact-link">
-                            <span class="material-symbols-outlined">Chat</span>0812-9757-7567
+                        <a href="https://wa.me/6281297577567" target="_blank" rel="noopener noreferrer" class="footer-contact-link">
+                            0812-9757-7567
                         </a>
                     </div>
                 </div>
