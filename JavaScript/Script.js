@@ -30,20 +30,30 @@ window.addEventListener('scroll', changeActiveLink);
 // Jalankan fungsi sekali saat halaman pertama kali dibuka
 window.addEventListener('DOMContentLoaded', changeActiveLink);
 
-// MAP LOKAASI LOGIC 
+// MOBILE MENU — ARIA-EXPANDED TOGGLE
+// Sinkronisasi state aria-expanded agar screen reader tahu menu terbuka/tertutup
+const menuBtn = document.querySelector('.mobile-menu-btn');
+if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+        const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', String(!isExpanded));
+    });
+}
+
+// MAP LOKAASI LOGIC
 const storeItems = document.querySelectorAll('.store-item');
-const mapFrame = document.getElementById('map-frame');
-const mapFrame2 = document.getElementById('map-frame-2');
+const mapDago = document.getElementById('map-dago');
+const mapBuahBatu = document.getElementById('map-buah-batu');
 
 storeItems.forEach(item => {
-    item.style.cursor = 'pointer'; 
+    item.style.cursor = 'pointer';
     item.addEventListener('click', function() {
         const targetMap = this.getAttribute('data-map');
-        if (mapFrame && targetMap) {
-            mapFrame.setAttribute('src', targetMap);
+        if (mapDago && targetMap) {
+            mapDago.setAttribute('src', targetMap);
         }
-        if (mapFrame2 && targetMap) {
-            mapFrame2.setAttribute('src', targetMap);
+        if (mapBuahBatu && targetMap) {
+            mapBuahBatu.setAttribute('src', targetMap);
         }
         storeItems.forEach(i => i.classList.remove('active'));
         this.classList.add('active');
