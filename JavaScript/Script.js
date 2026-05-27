@@ -47,15 +47,25 @@ const mapBuahBatu = document.getElementById('map-buah-batu');
 
 storeItems.forEach(item => {
     item.style.cursor = 'pointer';
-    item.addEventListener('click', function() {
-        const targetMap = this.getAttribute('data-map');
-        if (mapDago && targetMap) {
-            mapDago.setAttribute('src', targetMap);
-        }
-        if (mapBuahBatu && targetMap) {
-            mapBuahBatu.setAttribute('src', targetMap);
-        }
+    item.addEventListener('click', function () {
+
+        // 1. Pindahkan class active
         storeItems.forEach(i => i.classList.remove('active'));
         this.classList.add('active');
+
+        // 2. Tentukan iframe mana yang harus ditampilkan
+        const targetId = this.querySelector('h3').textContent.includes('Dago')
+            ? 'map-dago'
+            : 'map-buah-batu';
+
+        // 3. Lazy load: pasang src iframe Buah Batu hanya saat pertama kali diklik
+        if (targetId === 'map-buah-batu' && mapBuahBatu.dataset.src) {
+            mapBuahBatu.src = mapBuahBatu.dataset.src;
+            delete mapBuahBatu.dataset.src; // Tandai sudah di-load, tidak akan load ulang
+        }
+
+        // 4. Toggle visibilitas — show yang dipilih, hide yang lain
+        mapDago.style.display     = targetId === 'map-dago'      ? 'block' : 'none';
+        mapBuahBatu.style.display = targetId === 'map-buah-batu' ? 'block' : 'none';
     });
 });
