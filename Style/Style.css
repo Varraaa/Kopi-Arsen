@@ -25,7 +25,7 @@
 
     /* Typography Stack */
     --font-display: 'Libre Caslon Text', serif;
-    --font-body:    'Plus Jakarta Sans', sans-serif;
+    --font-body:    'Plus Jakarta Sans', sans-serif; 
 
     /* Layout Tokens */
     --unit:             8px;
@@ -150,7 +150,6 @@ ul {
 .btn-hero {
     padding: 16px 32px;
 }
-
 
 /* ==========================================================================
    04. NAVIGATION COMPONENT
