@@ -1,22 +1,22 @@
 /* ==========================================================================
-   ARSEN NAVIGATION LOGIC — Scroll Spy, Mobile Menu, Map Switcher
+   SCRIPT — Scroll Spy & Map Switcher
    ========================================================================== */
 
 export function initScript() {
 
-    // --------------------------------------------------------------------------
+    // ------------------------------------------------------------------
     // 01. ACTIVE NAV LINK SPY (Scroll Position)
-    // --------------------------------------------------------------------------
+    // ------------------------------------------------------------------
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('main section');
 
     function changeActiveLink() {
-        const scrollPosition = window.scrollY + 120; // Offset 120px agar pindah sebelum mentok atas
+        const scrollPosition = window.scrollY + 120;
 
         sections.forEach(section => {
-            const sectionTop    = section.offsetTop;
+            const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
-            const sectionId     = section.getAttribute('id');
+            const sectionId = section.getAttribute('id');
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
@@ -29,50 +29,40 @@ export function initScript() {
         });
     }
 
-    window.addEventListener('scroll', changeActiveLink);
-    changeActiveLink(); // Jalankan sekali saat halaman pertama kali dibuka
+    window.addEventListener('scroll', changeActiveLink, { passive: true });
+    changeActiveLink();
 
-    // --------------------------------------------------------------------------
-    // 02. MOBILE MENU — ARIA-EXPANDED TOGGLE
-    // --------------------------------------------------------------------------
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-
-    if (menuBtn) {
-        menuBtn.addEventListener('click', () => {
-            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-            menuBtn.setAttribute('aria-expanded', String(!isExpanded));
-        });
-    }
-
-    // --------------------------------------------------------------------------
-    // 03. MAP LOKASI — STORE ITEM CLICK SWITCHER
-    // --------------------------------------------------------------------------
-    const storeItems  = document.querySelectorAll('.store-item');
-    const mapDago     = document.getElementById('map-dago');
+    // ------------------------------------------------------------------
+    // 02. MAP SWITCHER — Store Locator
+    // ------------------------------------------------------------------
+    const storeItems = document.querySelectorAll('.store-item');
+    const mapDago = document.getElementById('map-dago');
     const mapBuahBatu = document.getElementById('map-buah-batu');
 
+    function activateStore(item) {
+        storeItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        const isDago = item.querySelector('h3').textContent.includes('Dago');
+
+        // Lazy load: pasang src iframe Buah Batu hanya saat pertama kali diklik
+        if (!isDago && mapBuahBatu.dataset.src) {
+            mapBuahBatu.src = mapBuahBatu.dataset.src;
+            delete mapBuahBatu.dataset.src;
+        }
+
+        mapDago.style.display = isDago ? 'block' : 'none';
+        mapBuahBatu.style.display = isDago ? 'none' : 'block';
+    }
+
     storeItems.forEach(item => {
-        item.style.cursor = 'pointer';
-
-        item.addEventListener('click', function () {
-            // 1. Pindahkan class active
-            storeItems.forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-
-            // 2. Tentukan iframe mana yang harus ditampilkan
-            const targetId = this.querySelector('h3').textContent.includes('Dago')
-                ? 'map-dago'
-                : 'map-buah-batu';
-
-            // 3. Lazy load: pasang src iframe Buah Batu hanya saat pertama kali diklik
-            if (targetId === 'map-buah-batu' && mapBuahBatu.dataset.src) {
-                mapBuahBatu.src = mapBuahBatu.dataset.src;
-                delete mapBuahBatu.dataset.src; // Tandai sudah di-load, tidak akan load ulang
+        item.addEventListener('click', () => activateStore(item));
+        // Keyboard accessibility
+        item.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                activateStore(item);
             }
-
-            // 4. Toggle visibilitas — show yang dipilih, hide yang lain
-            mapDago.style.display     = targetId === 'map-dago'      ? 'block' : 'none';
-            mapBuahBatu.style.display = targetId === 'map-buah-batu' ? 'block' : 'none';
         });
     });
 }

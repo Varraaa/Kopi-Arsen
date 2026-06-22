@@ -1,11 +1,11 @@
 /* ==========================================================================
-   MAIN — Entry point: import & inisialisasi semua modul
+   MAIN — Entry point
    ========================================================================== */
-import { initScript    } from './Script.js';
-import { initNavigation} from './Navigation.js';
-import { initMenu      } from './Menu.js';
+import { initScript } from './Script.js';
+import { initNavigation } from './Navigation.js';
+import { initMenu } from './Menu.js';
 import { initReservasi } from './Reservasi.js';
-import { initAnimasi   } from './Animasi.js';
+import { initAnimasi } from './Animasi.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initScript();

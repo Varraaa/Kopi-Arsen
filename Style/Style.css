@@ -1,49 +1,37 @@
 /* ==========================================================================
-   01. DESIGN TOKENS & SYSTEM VARIABLE THEMING
+   01. DESIGN TOKENS
    ========================================================================== */
 :root {
-    /* Color Palette Roles (Material Design 3 Concept) */
-    --primary:                   #a03f28;
-    --primary-container:         #c0573e;
-    --on-primary:                #ffffff;
-    --secondary:                 #8b5006;
-    --secondary-container:       #feb063;
-    --on-secondary-container:    #764200;
-    --tertiary:                  #605d5b;
-    --background:                #fff8f6;
-    --surface:                   #fff8f6;
-    --surface-variant:           #fddbd0;
-    --surface-container-lowest:  #ffffff;
-    --surface-container-low:     #fff1ec;
-    --surface-container:         #ffe9e2;
-    --surface-container-high:    #ffe2d8;
+    --primary: #a03f28;
+    --primary-container: #c0573e;
+    --on-primary: #ffffff;
+    --secondary: #8b5006;
+    --background: #fff8f6;
+    --surface: #fff8f6;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #fff1ec;
+    --surface-container: #ffe9e2;
+    --surface-container-high: #ffe2d8;
     --surface-container-highest: #fddbd0;
-    --on-surface:                #291710;
-    --on-surface-variant:        #56423d;
-    --outline:                   #8a726c;
-    --outline-variant:           #ddc0ba;
+    --on-surface: #291710;
+    --on-surface-variant: #56423d;
+    --outline-variant: #ddc0ba;
 
-    /* Typography Stack */
     --font-display: 'Libre Caslon Text', serif;
-    --font-body:    'Plus Jakarta Sans', sans-serif; 
+    --font-body: 'Plus Jakarta Sans', sans-serif;
 
-    /* Layout Tokens */
-    --unit:             8px;
-    --container-max:    1200px;
-    --gutter:           24px;
-    --margin-desktop:   40px;
-    --margin-mobile:    16px;
-    --radius-lg:        0.5rem;
-    --radius-xl:        0.75rem;
+    --container-max: 1200px;
+    --gutter: 24px;
+    --margin-desktop: 40px;
+    --margin-mobile: 16px;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
 }
 
 
 /* ==========================================================================
-   02. BASE CORE GLOBAL STYLES (Resets)
+   02. BASE RESET & GLOBALS
    ========================================================================== */
-
-/* FIX: Duplikat deklarasi html { scroll-behavior: smooth } dihapus.
-   Sebelumnya muncul di baris pertama file DAN di dalam seksi ini. */
 *,
 *::before,
 *::after {
@@ -56,13 +44,26 @@ html {
     scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
 body {
     background-color: var(--background);
     color: var(--on-surface);
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 24px;
-    padding-top: 80px; /* Offset untuk tinggi fixed navbar */
+    padding-top: 80px;
 }
 
 h1,
@@ -75,7 +76,7 @@ h3,
 a {
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
+    transition: color 0.25s ease, transform 0.25s ease;
 }
 
 button {
@@ -103,27 +104,13 @@ ul {
 
 
 /* ==========================================================================
-   03. CORE SYSTEM UTILITIES & GLOBAL BUTTONS
+   03. UTILITIES & BUTTONS
    ========================================================================== */
-.image-placeholder {
-    background-color: var(--surface-variant);
-    border: 2px dashed var(--outline);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--on-surface-variant);
-    font-weight: 600;
-    text-align: center;
-    padding: 20px;
-}
-
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     vertical-align: middle;
 }
 
-/* FIX: Ditambahkan — class ini digunakan di HTML pada section Signature Senja
-   (<section class="container section-padding">) namun belum didefinisikan di CSS. */
 .section-padding {
     padding: 96px 0;
 }
@@ -138,6 +125,7 @@ ul {
     letter-spacing: 0.05em;
     box-shadow: 0 4px 12px rgba(160, 63, 40, 0.2);
     display: inline-block;
+    transition: background-color 0.25s ease, transform 0.25s ease;
 }
 
 .btn-primary:hover {
@@ -145,24 +133,22 @@ ul {
     transform: scale(1.02);
 }
 
-/* FIX: Ditambahkan — modifier untuk tombol hero CTA.
-   Sebelumnya diset via inline style="padding: 16px 32px;" yang sudah dihapus dari HTML. */
 .btn-hero {
     padding: 16px 32px;
 }
 
+
 /* ==========================================================================
-   04. NAVIGATION COMPONENT
+   04. NAVIGATION
    ========================================================================== */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
     height: 80px;
-    background: rgba(255, 248, 246, 0.9);
+    background: rgba(255, 248, 246, 0.92);
     backdrop-filter: blur(10px);
-    /* FIX: Sebelumnya rgba(255, 0, 0, 0.2) — warna merah debugging yang lolos ke production.
-       Diganti dengan token warna yang benar dari design system. */
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--outline-variant);
     z-index: 100;
     display: flex;
@@ -187,21 +173,20 @@ nav {
     font-weight: 500;
     color: var(--on-surface-variant);
     position: relative;
-    text-decoration: none;
     padding-bottom: 4px;
-    transition: color 0.3s ease;
+    transition: color 0.25s ease;
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
     width: 100%;
-    transform: scaleX(0);
     height: 2px;
     bottom: 0;
     left: 0;
     background-color: var(--primary);
-    transform-origin: bottom center;
+    transform: scaleX(0);
+    transform-origin: center;
     transition: transform 0.3s ease-out;
 }
 
@@ -214,12 +199,12 @@ nav {
 }
 
 .nav-links a.active {
-    color: var(--primary) !important;
-    font-weight: 700 !important;
+    color: var(--primary);
+    font-weight: 700;
 }
 
 .nav-links a.active::after {
-    transform: scaleX(1) !important;
+    transform: scaleX(1);
 }
 
 .nav-actions {
@@ -238,8 +223,10 @@ nav {
     color: var(--on-surface);
 }
 
-/* FIX: Duplikat blok @media navbar identik dihapus.
-   Sebelumnya blok ini muncul dua kali berturut-turut. */
+.mobile-menu-btn .material-symbols-outlined {
+    font-size: 32px;
+}
+
 @media (min-width: 768px) {
     .nav-links {
         display: flex;
@@ -260,7 +247,7 @@ nav {
 
 
 /* ==========================================================================
-   05. HERO HEADER COMPONENT
+   05. HERO
    ========================================================================== */
 #hero {
     position: relative;
@@ -276,12 +263,23 @@ nav {
     position: absolute;
     inset: 0;
     z-index: -1;
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-bg img {
+    width: 105%;
+    height: 150%;
+    object-fit: cover;
+    transition: transform 0.1s linear;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, var(--surface), rgba(255, 248, 246, 0.8), transparent);
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .hero-content {
@@ -318,7 +316,7 @@ h1 .italic {
 
 
 /* ==========================================================================
-   06. FEATURED / SIGNATURE COLLECTION SECTION
+   06. SIGNATURE SENJA / FEATURED CARDS
    ========================================================================== */
 .section-header {
     text-align: center;
@@ -388,7 +386,6 @@ h1 .italic {
     width: 60%;
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
 .card-small .card-title {
     font-size: 20px;
 }
@@ -406,9 +403,15 @@ h1 .italic {
     position: relative;
 }
 
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .card-body {
     padding: 24px;
-    position: relative;
 }
 
 .card-large .card-body {
@@ -456,13 +459,8 @@ h1 .italic {
 
 
 /* ==========================================================================
-   07. STORY (ABOUT) & FROM BEAN TO CUP STEPS
+   07. ABOUT / STORY
    ========================================================================== */
-
-/* FIX: Selector #story tidak ada di HTML — hanya #about yang digunakan.
-   Padding 96px dan background dipindahkan ke dalam #about.
-   Sebelumnya ada dua rule terpisah: #story { padding; background } dan
-   #about { scroll-margin-top } — keduanya digabung di sini. */
 #about {
     padding: 96px 0;
     background: var(--surface-container-low);
@@ -490,12 +488,6 @@ h1 .italic {
     }
 }
 
-.story-img-container {
-    position: relative;
-}
-
-/* FIX: position: relative dideklarasikan dua kali dalam satu ruleset.
-   Salah satu dihapus. */
 .story-img {
     overflow: hidden;
     aspect-ratio: 4/5;
@@ -547,7 +539,6 @@ h1 .italic {
     text-align: center;
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
 .team-section-title {
     font-size: 32px;
     margin-bottom: 48px;
@@ -557,9 +548,6 @@ h1 .italic {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
 }
 
 @media (min-width: 768px) {
@@ -589,13 +577,12 @@ h1 .italic {
 
 
 /* ==========================================================================
-   08. MENU CATALOG COMPONENT
+   08. MENU CATALOG
    ========================================================================== */
 #menu {
     padding: 96px 0;
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
 .menu-header {
     margin-bottom: 64px;
 }
@@ -612,6 +599,7 @@ h1 .italic {
     gap: 16px;
     margin-top: -38px;
     padding-bottom: 38px;
+    scrollbar-width: none;
 }
 
 .menu-filter::-webkit-scrollbar {
@@ -625,6 +613,7 @@ h1 .italic {
     font-weight: 600;
     font-size: 14px;
     white-space: nowrap;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .filter-btn.active {
@@ -652,13 +641,9 @@ h1 .italic {
 
 .menu-item {
     text-align: center;
-    cursor: pointer;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    opacity: 1;
+    transition: opacity 0.4s ease;
 }
 
-/* FIX: position: relative dideklarasikan dua kali dalam satu ruleset.
-   Salah satu dihapus. */
 .menu-item-img {
     overflow: hidden;
     aspect-ratio: 4/5;
@@ -736,7 +721,10 @@ h1 .italic {
     border-bottom: 1px solid rgba(221, 192, 186, 0.3);
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.store-list-header h3 {
+    color: var(--primary);
+}
+
 .store-list-header p {
     font-size: 14px;
 }
@@ -753,6 +741,12 @@ h1 .italic {
     margin-bottom: 16px;
     border: 1px solid transparent;
     cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+
+.store-item:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .store-item.active {
@@ -773,26 +767,12 @@ h1 .italic {
     gap: 8px;
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
 .store-item-time {
     font-size: 12px;
     margin-top: 12px;
     display: block;
 }
 
-/* Gambar di dalam card — dipindahkan dari inline style di HTML */
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Header judul lokasi outlet — dipindahkan dari inline style di HTML */
-.store-list-header h3 {
-    color: var(--primary);
-}
-
-/* Iframe peta — dipindahkan dari inline style di HTML */
 #map-dago {
     border: 0;
     display: block;
@@ -806,7 +786,6 @@ h1 .italic {
 .map-view {
     width: 100%;
     height: 300px;
-    position: relative;
 }
 
 @media (min-width: 1024px) {
@@ -818,7 +797,7 @@ h1 .italic {
 
 
 /* ==========================================================================
-   10. BOOKING RESERVATION SYSTEM
+   10. RESERVASI
    ========================================================================== */
 #reservasi {
     padding: 96px 0;
@@ -845,12 +824,11 @@ h1 .italic {
     flex: 1;
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
 .res-form-side h2 {
     font-size: 40px;
 }
 
-.res-form-side > p {
+.res-form-side>p {
     margin-bottom: 32px;
     color: var(--on-surface-variant);
 }
@@ -869,8 +847,19 @@ h1 .italic {
     margin-bottom: 16px;
 }
 
-/* Hapus margin bawah form-group jika berada di dalam form-row
-   agar spacing dikelola oleh gap milik form-row */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+    .form-row {
+        flex-direction: row;
+    }
+}
+
 .form-row .form-group {
     margin-bottom: 0;
     flex: 1;
@@ -884,12 +873,6 @@ h1 .italic {
     color: var(--on-surface-variant);
 }
 
-.form-row {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 16px;
-}
-
 .form-control {
     width: 100%;
     padding: 12px 16px;
@@ -897,13 +880,17 @@ h1 .italic {
     border-radius: var(--radius-lg);
     background: var(--surface-container-lowest);
     font-family: inherit;
+    font-size: 15px;
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
+.form-control:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
 .btn-submit-full {
     width: 100%;
     padding: 16px;
-    cursor: pointer;
 }
 
 .info-card {
@@ -913,9 +900,6 @@ h1 .italic {
     border: 1px solid rgba(221, 192, 186, 0.3);
 }
 
-/* FIX: Ditambahkan .info-card-title sebagai selector eksplisit yang sesuai
-   dengan class yang digunakan di HTML (<h3 class="info-card-title">).
-   Selector .info-card h3 tetap dipertahankan sebagai fallback. */
 .info-card h3,
 .info-card-title {
     color: var(--primary);
@@ -931,7 +915,6 @@ h1 .italic {
     font-size: 14px;
 }
 
-/* FIX: Dipindahkan dari blok <style> di HTML ke seksi komponen yang tepat. */
 .info-row span:last-child {
     font-weight: 600;
 }
@@ -957,7 +940,7 @@ h1 .italic {
 
 
 /* ==========================================================================
-   11. FOOTER SYSTEM WIDE AREA
+   11. FOOTER
    ========================================================================== */
 footer {
     background: var(--surface-container-highest);
@@ -978,7 +961,6 @@ footer {
     }
 }
 
-/* FIX: Ditambahkan font-family agar konsisten dengan .brand-logo di navbar. */
 .footer-logo {
     font-family: var(--font-display);
     font-size: 24px;
@@ -1002,19 +984,12 @@ footer {
     font-size: 16px;
 }
 
-.footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
 .footer-links li {
     margin-bottom: 12px;
 }
 
 .footer-links a {
     font-size: 14px;
-    text-decoration: none;
     color: var(--on-surface-variant);
 }
 
@@ -1023,9 +998,6 @@ footer {
 }
 
 .footer-info-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     color: var(--on-surface-variant);
     font-size: 14px;
     line-height: 1.8;
@@ -1043,14 +1015,12 @@ footer {
 }
 
 .footer-contact-link {
-    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
     color: var(--primary);
     font-weight: 700;
     font-size: 16px;
-    transition: transform 0.3s ease;
 }
 
 .footer-contact-link:hover {
@@ -1067,13 +1037,13 @@ footer {
 
 
 /* ==========================================================================
-   12. SCROLL REVEAL UTILITY ANIMATION SYSTEM
+   12. SCROLL REVEAL ANIMATIONS
    ========================================================================== */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
-                transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform, opacity;
 }
 
@@ -1082,42 +1052,35 @@ footer {
     transform: translateY(0);
 }
 
-/* Staggered delay untuk animasi masuk kartu tim yang bergantian */
-.team-grid .team-card:nth-child(1) { transition-delay: 0.1s; }
-.team-grid .team-card:nth-child(2) { transition-delay: 0.2s; }
-.team-grid .team-card:nth-child(3) { transition-delay: 0.3s; }
-.team-grid .team-card:nth-child(4) { transition-delay: 0.4s; }
-.team-grid .team-card:nth-child(5) { transition-delay: 0.5s; }
-
-#hero .hero-bg img {
-    width: 105%;
-    height: 150%;
-    object-fit: cover;
-    transition: transform 0.1s linear;
+.team-grid .team-card:nth-child(1) {
+    transition-delay: 0.1s;
 }
 
-.mobile-menu-btn .material-symbols-outlined {
-    font-size: 32px;
+.team-grid .team-card:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.team-grid .team-card:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.team-grid .team-card:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.team-grid .team-card:nth-child(5) {
+    transition-delay: 0.5s;
 }
 
 
 /* ==========================================================================
-   13. HERO ENTRANCE ANIMATION SYSTEM
+   13. HERO ENTRANCE ANIMATIONS
    ========================================================================== */
-
-/* State awal background dan overlay (tersembunyi, dipicu oleh JS) */
-.hero-bg,
-.hero-overlay {
-    opacity: 0;
-    transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* State awal untuk elemen teks di dalam Hero */
 .hero-reveal-item {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1),
-                transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        transform 1s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform, opacity;
 }
 
@@ -1126,31 +1089,26 @@ footer {
     transform: translateY(0);
 }
 
-/* Staggered delay untuk animasi masuk konten hero */
-.hero-content h1.hero-revealed        { transition-delay: 0.3s; }
-.hero-content .hero-p.hero-revealed   { transition-delay: 0.5s; }
-.hero-content .btn-primary.hero-revealed { transition-delay: 0.7s; }
+.hero-content h1.hero-revealed {
+    transition-delay: 0.3s;
+}
+
+.hero-content .hero-p.hero-revealed {
+    transition-delay: 0.5s;
+}
+
+.hero-content .btn-primary.hero-revealed {
+    transition-delay: 0.7s;
+}
+
 
 /* ==========================================================================
-   14. MOBILE RESPONSIVE FIXES & DROPDOWN MENU
+   14. MOBILE NAVIGATION DROPDOWN
    ========================================================================== */
-
-/* Fix Layout Form Reservasi untuk Mobile */
-.form-row {
-    flex-direction: column; /* Menumpuk form ke bawah di layar kecil */
-}
-
-@media (min-width: 768px) {
-    .form-row {
-        flex-direction: row; /* Bersebelahan lagi di layar tablet/desktop */
-    }
-}
-
-/* Styling Dropdown Navbar untuk Mobile */
 @media (max-width: 767px) {
     .nav-links {
         position: absolute;
-        top: 80px; /* Muncul tepat di bawah navbar */
+        top: 80px;
         left: 0;
         width: 100%;
         background-color: var(--surface-container-lowest);
@@ -1159,15 +1117,12 @@ footer {
         box-shadow: 0 8px 24px rgba(41, 23, 16, 0.1);
         text-align: center;
         border-bottom: 1px solid var(--outline-variant);
-
-        /* Animasi Transisi */
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
-        transition: all 0.3s ease;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     }
 
-    /* Class ini akan dipicu (toggle) oleh JavaScript */
     .nav-links.show-menu {
         display: flex;
         opacity: 1;
@@ -1175,8 +1130,6 @@ footer {
         transform: translateY(0);
     }
 
-    /* Tombol reservasi di menu mobile juga bisa dimunculkan jika mau,
-       tapi disembunyikan agar rapi sesuai desain awalmu */
     .nav-actions {
         display: none;
     }

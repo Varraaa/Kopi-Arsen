@@ -1,34 +1,28 @@
 /* ==========================================================================
-   ARSEN WHATSAPP RESERVATION LOGIC
+   RESERVASI — WhatsApp Reservation Logic
    ========================================================================== */
 
 export function initReservasi() {
     const reservationForm = document.getElementById('whatsapp-reservation-form');
-
     if (!reservationForm) return;
 
     reservationForm.addEventListener('submit', function (event) {
-        // Mencegah halaman reload saat form di-submit
         event.preventDefault();
 
-        // 1. Ambil semua data input dari user
-        const name   = document.getElementById('res-name').value;
-        const phone  = document.getElementById('res-phone').value;
-        const date   = document.getElementById('res-date').value;
-        const time   = document.getElementById('res-time').value;
+        const name = document.getElementById('res-name').value.trim();
+        const phone = document.getElementById('res-phone').value.trim();
+        const date = document.getElementById('res-date').value;
+        const time = document.getElementById('res-time').value;
         const guests = document.getElementById('res-guests').value;
         const outlet = document.getElementById('res-outlet').value;
 
-        // Validasi tambahan untuk pilihan outlet
-        if (outlet === "") {
-            alert("Silakan pilih outlet Arsen Coffee terlebih dahulu!");
+        if (!outlet) {
+            alert('Silakan pilih outlet Arsen Coffee terlebih dahulu!');
             return;
         }
 
-        // 2. Nomor WhatsApp Admin Arsen (format kode negara, tanpa tanda '+')
-        const adminWhatsAppNumber = "6281297577567";
+        const adminWhatsAppNumber = '6281297577567';
 
-        // 3. Susun format template pesan teks yang akan dikirim ke WhatsApp admin
         const message =
             `Halo Admin Arsen Coffee, saya ingin melakukan reservasi meja.%0A%0A` +
             `*--- DATA RESERVASI ---*%0A` +
@@ -40,10 +34,6 @@ export function initReservasi() {
             `• *Jumlah Tamu :* ${guests} Orang%0A%0A` +
             `Mohon info ketersediaan tempatnya ya min, terima kasih!`;
 
-        // 4. Gabungkan nomor admin dan template pesan ke URL WhatsApp API
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminWhatsAppNumber}&text=${message}`;
-
-        // 5. Buka tab baru menuju WhatsApp
-        window.open(whatsappUrl, '_blank');
+        window.open(`https://api.whatsapp.com/send?phone=${adminWhatsAppNumber}&text=${message}`, '_blank');
     });
 }
